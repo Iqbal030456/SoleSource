@@ -6,7 +6,7 @@
     <title>SOLE SOURCE - Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Open+Sans+Hebrew+Condensed:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Open+Sans+Hebrew+Condensed:wght@400&family=Inter:wght@600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -27,7 +27,7 @@
         <!-- Search Bar (Right) -->
         <div class="search-container bg-white rounded-lg px-4 py-2 flex items-center gap-2 w-80">
             <!-- Search Icon - Ganti 'search-icon.png' dengan nama file PNG Anda -->
-            <img src="search-icon.png" alt="Search" class="w-5 h-5">
+            <img src="search-icon.png" alt="Search" class="w-[14px] h-[14px]">
             <input 
                 type="text" 
                 placeholder="Search Products..." 
@@ -35,6 +35,55 @@
             >
         </div>
     </header>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebar" class="sidebar">
+        <!-- Sidebar Header dengan Logo dan Text -->
+        <div class="sidebar-header">
+            <img src="logo-sidebar.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-text">SOLE</div>
+                <div class="sidebar-brand-text">SOURCE</div>
+            </div>
+            <!-- Close Button -->
+            <button id="closeSidebar" class="close-sidebar-btn">
+                <div class="close-btn-bg">
+                    <img src="close-icon.png" alt="Close" class="close-icon">
+                </div>
+            </button>
+        </div>
+
+        <!-- Sidebar Menu Items -->
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-item">
+                <span>Home</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+            <a href="#" class="sidebar-item">
+                <span>News</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+            <a href="#" class="sidebar-item">
+                <span>About</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+            <a href="#" class="sidebar-item">
+                <span>New Items</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+            <a href="#" class="sidebar-item">
+                <span>Popular Items</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+            <a href="#" class="sidebar-item">
+                <span>Contact Us</span>
+                <img src="arrow-right.png" alt="Arrow" class="sidebar-arrow">
+            </a>
+        </nav>
+    </div>
+
+    <!-- Overlay (Background Gelap) -->
+    <div id="overlay" class="overlay"></div>
 
     <!-- Main Content Area -->
     <main class="flex-1 gradient-bg">

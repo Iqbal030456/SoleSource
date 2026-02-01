@@ -26,7 +26,27 @@ footer {
     background-size: cover;        /* Menutupi seluruh area */
     background-position: center;   /* Posisi tengah */
     background-repeat: no-repeat;  /* Tidak berulang */
-    min-height: calc(100vh - 200px);
+    width: 100%;                   /* Full width - mengisi seluruh lebar layar */
+    min-height: 1250px;           /* Tinggi minimal 1250px */
+}
+
+/* Responsive adjustments for different devices */
+@media (max-width: 1080px) {
+    .gradient-bg {
+        min-height: 800px;        /* Tinggi disesuaikan untuk tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .gradient-bg {
+        min-height: 600px;        /* Tinggi disesuaikan untuk mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .gradient-bg {
+        min-height: 400px;        /* Tinggi disesuaikan untuk small mobile */
+    }
 }
 
 /* Logo Text Styling */
@@ -77,6 +97,150 @@ footer {
     font-family: 'Open Sans Hebrew Condensed', sans-serif;
     font-weight: 400;
     color: #FFFFFF;
+}
+
+/* ============================================
+   SIDEBAR STYLES
+   ============================================ */
+
+/* Overlay - Background gelap di belakang sidebar */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 998;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar Container */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 263px;
+    height: 100%;
+    background-color: #1a3a52;
+    padding-top: 36px;
+    padding-bottom: 38px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* Prevent body scroll when sidebar is open */
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* Sidebar Header (Logo + Text + Close Button) */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.sidebar-logo {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.sidebar-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.sidebar-brand-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+}
+
+/* Close Button (X) */
+.close-sidebar-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-btn-bg {
+    width: 40px;
+    height: 40px;
+    background-color: #9DF29C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transform: rotate(45deg);
+}
+
+.close-icon {
+    width: 20px;
+    height: 20px;
+    transform: rotate(-45deg);
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Sidebar Menu Items */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 12px 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar-item:hover {
+    opacity: 0.8;
+}
+
+.sidebar-item span {
+    flex: 1;
+}
+
+.sidebar-arrow {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 /* Responsive Design */
