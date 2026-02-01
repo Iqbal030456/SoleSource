@@ -1,0 +1,135 @@
+/* Custom CSS for SOLE SOURCE */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Header and Footer Full Width */
+header,
+footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Gradient Background for Main Content */
+.gradient-bg {
+    background-image: url('background.png');  /* Ganti 'background.png' dengan nama file PNG Anda */
+    background-size: cover;        /* Menutupi seluruh area */
+    background-position: center;   /* Posisi tengah */
+    background-repeat: no-repeat;  /* Tidak berulang */
+    min-height: calc(100vh - 200px);
+}
+
+/* Logo Text Styling */
+.logo-text,
+.footer-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+}
+
+/* Search Input Styling */
+.search-input {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.search-input::placeholder {
+    color: #124566;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Menu Button Hover Effect */
+.menu-btn {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.menu-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Search Container Styling */
+.search-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Placeholder styling for images */
+.logo-placeholder,
+.search-icon-placeholder,
+.social-icon-placeholder,
+.menu-icon-placeholder {
+    flex-shrink: 0;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* Copyright Text */
+.copyright-text {
+    font-family: 'Open Sans Hebrew Condensed', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    header,
+    footer {
+        padding-left: 60px !important;
+        padding-right: 62px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    header,
+    footer {
+        padding-left: 30px !important;
+        padding-right: 32px !important;
+    }
+
+    .search-container {
+        width: 200px;
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+    }
+
+    .footer-text {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header,
+    footer {
+        padding-left: 20px !important;
+        padding-right: 22px !important;
+    }
+
+    .search-container {
+        display: none;
+    }
+
+    header {
+        justify-content: space-between;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    footer .flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
