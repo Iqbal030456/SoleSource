@@ -99,6 +99,25 @@ footer {
     color: #FFFFFF;
 }
 
+/* Decorative Circles - Pojok Kanan Atas Footer */
+.decorative-circles {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 280px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.circles-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top right;
+}
+
 /* ============================================
    SIDEBAR STYLES
    ============================================ */
@@ -126,14 +145,14 @@ footer {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -300px;
-    width: 263px;
+    left: -327px; /* Lebar sidebar + 64px */
+    width: 327px; /* 263px + 64px extra untuk arrow space */
     height: 100%;
     background-color: #1a3a52;
     padding-top: 36px;
     padding-bottom: 38px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 45px; /* 45px dari kiri */
+    padding-right: 64px; /* 64px dari kanan untuk arrow */
     transition: left 0.3s ease;
     z-index: 999;
     overflow-y: auto;
@@ -154,14 +173,16 @@ body.sidebar-open {
 .sidebar-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    margin-top: 20px;
     position: relative;
 }
 
 .sidebar-logo {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
 }
 
@@ -174,21 +195,24 @@ body.sidebar-open {
 .sidebar-brand-text {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 1;
+    font-size: 28px;
+    line-height: 1.2;
     color: #FFFFFF;
     letter-spacing: 0.05em;
 }
 
-/* Close Button (X) */
+/* Close Button (X) - Di sebelah kanan SOLE SOURCE, sejajar dengan tinggi text */
 .close-sidebar-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.close-sidebar-btn:hover {
+    transform: scale(1.1);
 }
 
 .close-btn-bg {
@@ -198,8 +222,9 @@ body.sidebar-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 8px;
     transform: rotate(45deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .close-icon {

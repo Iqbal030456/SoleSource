@@ -91,10 +91,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#1a3a52] py-8 w-full" style="padding-left: 120px; padding-right: 122px;">
-        <div class="max-w-full mx-auto">
+    <footer class="bg-[#1a3a52] w-full relative" style="padding-left: 120px; padding-right: 122px; padding-top: 60px; padding-bottom: 40px; min-height: 280px;">
+        <!-- Decorative Circles (Placeholder untuk PNG) - Pojok Kanan Atas -->
+        <div class="decorative-circles">
+            <img src="footer-circles.png" alt="Decorative Circles" class="circles-image">
+        </div>
+        
+        <div class="max-w-full mx-auto relative z-10">
             <!-- Logo, Text and Social Media Section -->
-            <div class="flex items-center mb-8">
+            <div class="flex items-center mb-12">
                 <!-- Left Side: Logo and Text -->
                 <div class="flex items-center" style="gap: 16px;">
                     <!-- Logo - Ganti 'logo.png' dengan nama file PNG Anda -->
@@ -106,20 +111,26 @@
 
                 <!-- Right Side: Social Media Icons -->
                 <div class="flex items-center" style="gap: 8px; margin-left: 47px;">
-                    <!-- Instagram Icon - Ganti 'instagram-icon.png' dengan nama file PNG Anda -->
-                    <img src="instagram-icon.png" alt="Instagram" class="w-[40px] h-[40px]">
-                    <!-- WhatsApp Icon - Ganti 'whatsapp-icon.png' dengan nama file PNG Anda -->
-                    <img src="whatsapp-icon.png" alt="WhatsApp" class="w-[40px] h-[40px]">
-                    <!-- Twitter/X Icon - Ganti 'twitter-icon.png' dengan nama file PNG Anda -->
-                    <img src="twitter-icon.png" alt="Twitter" class="w-[40px] h-[40px]">
+                    <!-- Instagram Icon - Link ke Instagram -->
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <img src="instagram-icon.png" alt="Instagram" class="w-[40px] h-[40px] cursor-pointer hover:opacity-80 transition-opacity">
+                    </a>
+                    <!-- WhatsApp Icon - Link ke WhatsApp -->
+                    <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+                        <img src="whatsapp-icon.png" alt="WhatsApp" class="w-[40px] h-[40px] cursor-pointer hover:opacity-80 transition-opacity">
+                    </a>
+                    <!-- Twitter/X Icon - Link ke Twitter/X -->
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                        <img src="twitter-icon.png" alt="Twitter" class="w-[40px] h-[40px] cursor-pointer hover:opacity-80 transition-opacity">
+                    </a>
                 </div>
             </div>
 
-            <!-- Divider Line -->
-            <div class="border-t border-[#9DF29C] mb-4"></div>
+            <!-- Divider Line - DIPERBAIKI: Tambah padding kanan agar tidak nyentuh circles -->
+            <div class="border-t border-[#9DF29C] mb-6" style="margin-right: 380px;"></div>
 
-            <!-- Copyright -->
-            <div class="copyright-text text-[#FFFFFF] text-sm text-center">
+            <!-- Copyright - DIPERBAIKI: Tambah padding kanan agar tidak nyentuh circles -->
+            <div class="copyright-text text-[#FFFFFF] text-sm text-center" style="padding-right: 380px;">
                 ©2025 SOLE SOURCE
             </div>
         </div>
