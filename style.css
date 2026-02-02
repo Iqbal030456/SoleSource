@@ -22,7 +22,7 @@ footer {
 
 /* Gradient Background for Main Content */
 .gradient-bg {
-    background-image: url('background.png');  /* Ganti 'background.png' dengan nama file PNG Anda */
+    background-image: url('assests/background.png');  /* Ganti 'background.png' dengan nama file PNG Anda */
     background-size: cover;        /* Menutupi seluruh area */
     background-position: center;   /* Posisi tengah */
     background-repeat: no-repeat;  /* Tidak berulang */
