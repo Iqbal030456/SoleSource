@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for SOLE SOURCE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #0a1628;
+}
+
+/* Selection styling */
+::selection {
+    background-color: rgba(198, 255, 0, 0.3);
+    color: #fff;
+}
+
+/* Gradient Background for Main Content */
+.gradient-bg {
+    background-image: url('/assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 1250px;
+}
+
+@media (max-width: 1080px) {
+    .gradient-bg {
+        min-height: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gradient-bg {
+        min-height: 600px;
+    }
+}
+
+/* Logo and Text Styling */
+.logo-text,
+.footer-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+}
+
+/* Search Input */
+.search-input::placeholder {
+    color: #124566;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.search-input:focus::placeholder {
+    color: #6b7280;
+}
+
+/* Copyright Text */
+.copyright-text {
+    font-family: 'Open Sans Hebrew Condensed', 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid rgba(198, 255, 0, 0.5);
+    outline-offset: 2px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -327px;
+    width: 327px;
+    height: 100%;
+    background-color: #1a3a52;
+    padding: 36px 64px 38px 45px;
+    transition: left 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 999;
+    overflow-y: auto;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 998;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* Subtle scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a1628;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(198, 255, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(198, 255, 0, 0.5);
+}
