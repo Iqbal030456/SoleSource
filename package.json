@@ -1,8 +1,20 @@
 {
   "name": "sole-source",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "description": "Welcome to **SoleSource**! This document is designed to help junior developers onboard quickly by detailing the tech stack, project structure, and key architectural decisions used in the application.",
+  "homepage": "https://github.com/Iqbal030456/SoleSource#readme",
+  "bugs": {
+    "url": "https://github.com/Iqbal030456/SoleSource/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Iqbal030456/SoleSource.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "postcss.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,6 +23,7 @@
   },
   "dependencies": {
     "framer-motion": "^12.33.0",
+    "i": "^0.3.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.13.0"

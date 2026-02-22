@@ -1,36 +1,29 @@
-import { useState } from 'react';
+/**
+ * ============================================================
+ * NewsPage
+ * ============================================================
+ *
+ * PURPOSE:
+ *   Displays the latest news articles about sneakers and streetwear.
+ *
+ * HOW TO EDIT:
+ *   - To add/edit news articles, edit `src/data/news.js`
+ *   - Page transition: configured in `src/config/animations.js`
+ *
+ * ROUTE: "/news" (defined in App.jsx)
+ * ============================================================
+ */
+
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import LatestNews from '../components/LatestNews';
-
-const pageVariants = {
-    initial: { opacity: 0, y: 20 },
-    enter: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-    exit: {
-        opacity: 0,
-        y: -20,
-        transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-};
+import { useSidebar } from '../hooks/useSidebar';
+import { pageVariants } from '../config/animations';
 
 const NewsPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const openSidebar = () => {
-        setIsSidebarOpen(true);
-        document.body.classList.add('sidebar-open');
-    };
-
-    const closeSidebar = () => {
-        setIsSidebarOpen(false);
-        document.body.classList.remove('sidebar-open');
-    };
+    const { isSidebarOpen, openSidebar, closeSidebar } = useSidebar();
 
     return (
         <motion.div
@@ -53,4 +46,3 @@ const NewsPage = () => {
 };
 
 export default NewsPage;
-

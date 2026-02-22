@@ -1,26 +1,64 @@
-import { useState } from 'react';
+/**
+ * ============================================================
+ * AboutPage
+ * ============================================================
+ *
+ * PURPOSE:
+ *   The "About Us" page. Explains what SoleSource is, its value
+ *   propositions, and how it works for both shoppers and brands.
+ *
+ * SECTIONS:
+ *   1. Hero — large headline with product collage
+ *   2. Value Propositions — 3 feature highlights (Curated, Real-Time, Global)
+ *   3. Additional Props — 3 more features (Free, Verified, Community)
+ *   4. How It Works — split panel (Discover for shoppers / Promote for brands)
+ *   5. CTA — call-to-action banner
+ *
+ * HOW TO EDIT:
+ *   - To change value prop text/icons, edit the `valueProps` and
+ *     `additionalProps` arrays below
+ *   - To change "How it works" steps, edit `discoverSteps` and `promoteSteps`
+ *   - To change hero text, edit the JSX in the "Hero Section" below
+ *   - Page transition: configured in `src/config/animations.js`
+ *
+ * ROUTE: "/about" (defined in App.jsx)
+ * ============================================================
+ */
+
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
+import { useSidebar } from '../hooks/useSidebar';
+import { pageVariants, fadeInUp } from '../config/animations';
 
-const pageVariants = {
+// ------------------------------------
+// Page-specific animation configs
+// (used only on this page, not shared)
+// ------------------------------------
+const aboutPageVariants = {
     initial: { opacity: 0 },
     enter: { opacity: 1, transition: { duration: 0.5 } },
     exit: { opacity: 0, transition: { duration: 0.3 } },
 };
 
-const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
-};
-
 const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,  // 150ms gap between each card's animation
+            delayChildren: 0.2,     // Wait 200ms before first card starts
+        },
+    },
 };
 
-// Value propositions - adapted for promotion platform
+// ------------------------------------
+// Content Configuration
+// Edit these arrays to change what appears on the page
+// ------------------------------------
+
+/** Main value propositions — shown as 3 feature cards */
 const valueProps = [
     {
         icon: (
@@ -54,6 +92,7 @@ const valueProps = [
     },
 ];
 
+/** Secondary value props — smaller cards below the main ones */
 const additionalProps = [
     {
         icon: (
@@ -84,36 +123,22 @@ const additionalProps = [
     },
 ];
 
-// How it works steps - for sneaker enthusiasts
+/** "How it works" steps for sneaker enthusiasts (left panel) */
 const discoverSteps = [
     { number: "1", title: "Browse Our Collection", description: "Explore our curated selection of the latest and most sought-after sneakers and streetwear." },
     { number: "2", title: "Get the Details", description: "View detailed information including retail prices, release dates, and available sizes." },
     { number: "3", title: "Shop Direct", description: "Click through to purchase directly from verified retailers with confidence." },
 ];
 
-// How it works steps - for brands/sellers
+/** "How it works" steps for brands/sellers (right panel) */
 const promoteSteps = [
     { number: "1", title: "Partner With Us", description: "Brands and retailers can reach our engaged community of sneaker enthusiasts." },
     { number: "2", title: "Get Featured", description: "Your products get premium visibility across our platform and social channels." },
     { number: "3", title: "Grow Your Reach", description: "Connect with passionate buyers ready to cop your latest releases." },
 ];
 
-const trustedBy = [
-    "Nike", "Adidas", "Jordan", "New Balance", "Puma", "Reebok"
-];
-
 const AboutPage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const openSidebar = () => {
-        setIsSidebarOpen(true);
-        document.body.classList.add('sidebar-open');
-    };
-
-    const closeSidebar = () => {
-        setIsSidebarOpen(false);
-        document.body.classList.remove('sidebar-open');
-    };
+    const { isSidebarOpen, openSidebar, closeSidebar } = useSidebar();
 
     return (
         <motion.div
@@ -121,17 +146,17 @@ const AboutPage = () => {
             initial="initial"
             animate="enter"
             exit="exit"
-            variants={pageVariants}
+            variants={aboutPageVariants}
         >
             <Header onMenuClick={openSidebar} />
             <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
 
             <main className="flex-1">
-                {/* Hero Section - Dark with product collage */}
+                {/* ===== Hero Section ===== */}
                 <section className="bg-[#0a1628] text-white py-16 lg:py-24">
                     <div className="container mx-auto px-8 lg:px-[120px]">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            {/* Left - Text Content */}
+                            {/* Left — Text Content */}
                             <motion.div
                                 initial={{ opacity: 0, x: -50 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -148,7 +173,7 @@ const AboutPage = () => {
                                     We don't sell sneakers – we help you find them. Our mission is to connect sneakerheads with the most coveted releases through curated promotions and real-time updates.
                                 </p>
 
-                                {/* Action buttons */}
+                                {/* Action Buttons */}
                                 <div className="flex flex-wrap gap-4">
                                     <motion.a
                                         href="#how-it-works"
@@ -186,7 +211,7 @@ const AboutPage = () => {
                                 </div>
                             </motion.div>
 
-                            {/* Right - Product Collage */}
+                            {/* Right — Product Collage */}
                             <motion.div
                                 className="relative"
                                 initial={{ opacity: 0, x: 50 }}
@@ -194,39 +219,25 @@ const AboutPage = () => {
                                 transition={{ duration: 0.7, delay: 0.2 }}
                             >
                                 <div className="relative w-full aspect-square max-w-md mx-auto">
-                                    {/* Background glow */}
+                                    {/* Background glow effect */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-lime/20 via-transparent to-mint/20 rounded-3xl blur-3xl" />
 
-                                    {/* Product grid simulation */}
+                                    {/* Product grid */}
                                     <div className="relative grid grid-cols-2 gap-4 p-8">
-                                        <motion.div
-                                            className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden aspect-square"
-                                            whileHover={{ scale: 1.05, y: -5 }}
-                                            transition={{ type: "spring", stiffness: 300 }}
-                                        >
-                                            <img src="https://picsum.photos/seed/sneaker1/200/200" alt="Sneaker" className="w-full h-full object-cover" />
-                                        </motion.div>
-                                        <motion.div
-                                            className="bg-lime/20 backdrop-blur-sm rounded-2xl overflow-hidden aspect-square"
-                                            whileHover={{ scale: 1.05, y: -5 }}
-                                            transition={{ type: "spring", stiffness: 300 }}
-                                        >
-                                            <img src="https://picsum.photos/seed/sneaker2/200/200" alt="Sneaker" className="w-full h-full object-cover" />
-                                        </motion.div>
-                                        <motion.div
-                                            className="bg-mint/20 backdrop-blur-sm rounded-2xl overflow-hidden aspect-square"
-                                            whileHover={{ scale: 1.05, y: -5 }}
-                                            transition={{ type: "spring", stiffness: 300 }}
-                                        >
-                                            <img src="https://picsum.photos/seed/sneaker3/200/200" alt="Sneaker" className="w-full h-full object-cover" />
-                                        </motion.div>
-                                        <motion.div
-                                            className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden aspect-square"
-                                            whileHover={{ scale: 1.05, y: -5 }}
-                                            transition={{ type: "spring", stiffness: 300 }}
-                                        >
-                                            <img src="https://picsum.photos/seed/sneaker4/200/200" alt="Sneaker" className="w-full h-full object-cover" />
-                                        </motion.div>
+                                        {[1, 2, 3, 4].map((num) => (
+                                            <motion.div
+                                                key={num}
+                                                className={`${num % 2 === 0 ? 'bg-lime/20' : 'bg-white/10'} backdrop-blur-sm rounded-2xl overflow-hidden aspect-square`}
+                                                whileHover={{ scale: 1.05, y: -5 }}
+                                                transition={{ type: "spring", stiffness: 300 }}
+                                            >
+                                                <img
+                                                    src={`https://picsum.photos/seed/sneaker${num}/200/200`}
+                                                    alt="Sneaker"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </motion.div>
+                                        ))}
                                     </div>
                                 </div>
                             </motion.div>
@@ -234,7 +245,7 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* Value Propositions - Light section */}
+                {/* ===== Value Propositions ===== */}
                 <section className="py-20 bg-gradient-to-b from-gray-50 to-white" id="how-it-works">
                     <div className="container mx-auto px-8 lg:px-[120px]">
                         <motion.div
@@ -267,7 +278,7 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* Additional Value Props - 3 columns */}
+                {/* ===== Additional Value Props ===== */}
                 <section className="py-16 bg-white border-t border-gray-100">
                     <div className="container mx-auto px-8 lg:px-[120px]">
                         <motion.div
@@ -294,10 +305,10 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* How It Works - Split Section */}
+                {/* ===== How It Works — Split Section ===== */}
                 <section className="relative overflow-hidden">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        {/* Left - For Shoppers (Light) */}
+                        {/* Left — For Shoppers (Light background) */}
                         <motion.div
                             id="discover"
                             className="bg-gray-100 py-16 lg:py-24 px-8 lg:px-16"
@@ -337,7 +348,7 @@ const AboutPage = () => {
                             </div>
                         </motion.div>
 
-                        {/* Right - For Brands (Dark) */}
+                        {/* Right — For Brands (Dark background) */}
                         <motion.div
                             id="promote"
                             className="bg-[#0a1628] py-16 lg:py-24 px-8 lg:px-16"
@@ -378,7 +389,7 @@ const AboutPage = () => {
                         </motion.div>
                     </div>
 
-                    {/* Center Decorative Element */}
+                    {/* Center Decorative Circle */}
                     <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                         <motion.div
                             className="w-32 h-32 bg-white rounded-full shadow-2xl flex items-center justify-center"
@@ -395,7 +406,7 @@ const AboutPage = () => {
                     </div>
                 </section>
 
-                {/* CTA Section */}
+                {/* ===== CTA Section ===== */}
                 <section className="py-10 gradient-bg">
                     <div className="container mx-auto px-8 lg:px-[120px] text-center">
                         <motion.div

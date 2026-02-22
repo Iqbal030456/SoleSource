@@ -1,36 +1,37 @@
-import { useState } from 'react';
+/**
+ * ============================================================
+ * HomePage
+ * ============================================================
+ *
+ * PURPOSE:
+ *   The main landing page of SoleSource. Shows:
+ *   - Header with search bar
+ *   - Sidebar navigation (toggled by hamburger menu)
+ *   - Featured Products section (the main content)
+ *   - Footer with social links
+ *
+ * HOW TO EDIT:
+ *   - To change which products appear, edit `src/data/products.js`
+ *   - To change the page transition animation, edit `src/config/animations.js`
+ *   - To change the background, edit the `.gradient-bg` class in `src/index.css`
+ *   - The sidebar logic is handled by `src/hooks/useSidebar.js`
+ *
+ * ROUTE: "/" (defined in App.jsx)
+ * ============================================================
+ */
+
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import FeaturedProducts from '../components/FeaturedProducts';
-
-const pageVariants = {
-    initial: { opacity: 0, y: 20 },
-    enter: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-    exit: {
-        opacity: 0,
-        y: -20,
-        transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-};
+import { useSidebar } from '../hooks/useSidebar';
+import { pageVariants } from '../config/animations';
 
 const HomePage = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const openSidebar = () => {
-        setIsSidebarOpen(true);
-        document.body.classList.add('sidebar-open');
-    };
-
-    const closeSidebar = () => {
-        setIsSidebarOpen(false);
-        document.body.classList.remove('sidebar-open');
-    };
+    // Custom hook that manages sidebar open/close state
+    // and handles body scroll lock automatically
+    const { isSidebarOpen, openSidebar, closeSidebar } = useSidebar();
 
     return (
         <motion.div
@@ -40,17 +41,21 @@ const HomePage = () => {
             exit="exit"
             variants={pageVariants}
         >
+            {/* Top navigation bar */}
             <Header onMenuClick={openSidebar} />
+
+            {/* Slide-in sidebar menu */}
             <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
 
+            {/* Main Content Area */}
             <main className="flex-1 gradient-bg">
                 <FeaturedProducts />
             </main>
 
+            {/* Site footer */}
             <Footer />
         </motion.div>
     );
 };
 
 export default HomePage;
-

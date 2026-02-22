@@ -1,3 +1,25 @@
+/**
+ * ============================================================
+ * SearchPage
+ * ============================================================
+ *
+ * PURPOSE:
+ *   Displays search results for products and news articles.
+ *   The search query comes from the URL parameter `?q=<query>`.
+ *
+ * HOW IT WORKS:
+ *   1. Reads the search query from the URL
+ *   2. Filters products (by name/brand) and news (by title/excerpt)
+ *   3. Displays matching results in separate grids
+ *
+ * HOW TO EDIT:
+ *   - Search logic: the `useMemo` hooks below control what fields are searched
+ *   - To search additional fields, add them to the `.filter()` conditions
+ *
+ * ROUTE: "/search" (defined in App.jsx)
+ * ============================================================
+ */
+
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,45 +30,18 @@ import ProductCard from '../components/ProductCard';
 import NewsCard from '../components/NewsCard';
 import { products } from '../data/products';
 import { newsArticles } from '../data/news';
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-};
-
-const pageVariants = {
-    initial: { opacity: 0, y: 20 },
-    enter: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-    exit: {
-        opacity: 0,
-        y: -20,
-        transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
-    },
-};
+import { useSidebar } from '../hooks/useSidebar';
+import { pageVariants, staggerContainerVariants, itemVariants } from '../config/animations';
 
 const SearchPage = () => {
+    // Read the `?q=` parameter from the URL
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q') || '';
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    // Search products
+    const { isSidebarOpen, openSidebar, closeSidebar } = useSidebar();
+
+    // Filter products that match the search query
+    // `useMemo` caches the result so it only recalculates when `query` changes
     const filteredProducts = useMemo(() => {
         if (!query.trim()) return [];
         const lowerQuery = query.toLowerCase();
@@ -56,7 +51,7 @@ const SearchPage = () => {
         );
     }, [query]);
 
-    // Search news
+    // Filter news articles that match the search query
     const filteredNews = useMemo(() => {
         if (!query.trim()) return [];
         const lowerQuery = query.toLowerCase();
@@ -67,16 +62,6 @@ const SearchPage = () => {
     }, [query]);
 
     const totalResults = filteredProducts.length + filteredNews.length;
-
-    const openSidebar = () => {
-        setIsSidebarOpen(true);
-        document.body.classList.add('sidebar-open');
-    };
-
-    const closeSidebar = () => {
-        setIsSidebarOpen(false);
-        document.body.classList.remove('sidebar-open');
-    };
 
     return (
         <motion.div
@@ -110,7 +95,7 @@ const SearchPage = () => {
                         </p>
                     </motion.div>
 
-                    {/* No Results */}
+                    {/* No Results Message */}
                     {query && totalResults === 0 && (
                         <motion.div
                             className="text-center py-12"
@@ -134,7 +119,7 @@ const SearchPage = () => {
                             </h3>
                             <motion.div
                                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                                variants={containerVariants}
+                                variants={staggerContainerVariants}
                                 initial="hidden"
                                 animate="visible"
                             >
@@ -155,7 +140,7 @@ const SearchPage = () => {
                             </h3>
                             <motion.div
                                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                                variants={containerVariants}
+                                variants={staggerContainerVariants}
                                 initial="hidden"
                                 animate="visible"
                             >

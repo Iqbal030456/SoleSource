@@ -1,35 +1,77 @@
+/*
+ * ============================================================
+ * Global Styles — index.css
+ * ============================================================
+ *
+ * This file contains styles that apply to the ENTIRE application.
+ * It is imported once in `main.jsx` and affects every page.
+ *
+ * STRUCTURE:
+ *   1. Tailwind imports (required — do NOT remove these)
+ *   2. Global resets (box-sizing, margins, font smoothing)
+ *   3. Custom utility classes (gradient-bg, sidebar, scrollbar)
+ *
+ * WHEN TO EDIT THIS FILE:
+ *   - When you need a style that applies to every page
+ *   - When you need custom CSS that Tailwind doesn't support
+ *   - When adding global animations or transitions
+ *
+ * WHEN NOT TO EDIT THIS FILE:
+ *   - For component-specific styles — use Tailwind classes
+ *     directly in the component's JSX instead
+ *
+ * BRAND COLORS (also defined in tailwind.config.js):
+ *   Navy:  #1a3a52   — primary dark blue
+ *   Mint:  #4ECDC4   — teal accent
+ *   Lime:  #9DF29C   — bright green accent
+ *   Body:  #0a1628   — deepest dark background
+ * ============================================================
+ */
+
+/* --- 1. Tailwind CSS Imports (DO NOT REMOVE) --- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS for SOLE SOURCE */
+/* --- 2. Global Resets --- */
+/* Remove default browser margins/padding and use border-box sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Smoother font rendering across browsers */
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
 
+/* Base body styles */
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
     width: 100%;
     background-color: #0a1628;
+    /* Deep dark blue background */
 }
 
-/* Selection styling */
+/* Text selection highlight color (lime green tint) */
 ::selection {
     background-color: rgba(198, 255, 0, 0.3);
     color: #fff;
 }
 
-/* Gradient Background for Main Content */
+/* --- 3. Custom Utility Classes --- */
+
+/*
+ * Gradient Background
+ * Used on the <main> element of most pages.
+ * Points to a background image in /public/assets/
+ * The min-height adjusts for different screen sizes.
+ */
 .gradient-bg {
     background-image: url('/assets/background.png');
     background-size: cover;
@@ -39,19 +81,24 @@ body {
     min-height: 1250px;
 }
 
+/* Tablet screens (max-width: 1080px) */
 @media (max-width: 1080px) {
     .gradient-bg {
         min-height: 800px;
     }
 }
 
+/* Mobile screens (max-width: 768px) */
 @media (max-width: 768px) {
     .gradient-bg {
         min-height: 600px;
     }
 }
 
-/* Logo and Text Styling */
+/*
+ * Logo & Footer Text
+ * Shared font styles for the brand name text
+ */
 .logo-text,
 .footer-text {
     font-family: 'Open Sans', sans-serif;
@@ -59,7 +106,10 @@ body {
     letter-spacing: 0.1em;
 }
 
-/* Search Input */
+/*
+ * Search Input Placeholder Styling
+ * Controls the color of placeholder text in the search bar
+ */
 .search-input::placeholder {
     color: #124566;
     font-family: 'Open Sans', sans-serif;
@@ -67,6 +117,7 @@ body {
 
 .search-input:focus::placeholder {
     color: #6b7280;
+    /* Lighter gray when focused */
 }
 
 /* Copyright Text */
@@ -76,7 +127,11 @@ body {
     color: #FFFFFF;
 }
 
-/* Focus states for accessibility */
+/*
+ * Accessibility Focus States
+ * Shows a visible outline when users navigate with keyboard (Tab key).
+ * This is important for users who don't use a mouse.
+ */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
@@ -84,17 +139,26 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
-/* Sidebar Styles */
+/*
+ * Sidebar Styles
+ * The sidebar slides in from the left edge of the screen.
+ * - Default state: hidden off-screen (left: -327px)
+ * - Active state: slides to left: 0 (visible)
+ * The `.active` class is toggled by the useSidebar hook.
+ */
 .sidebar {
     position: fixed;
     top: 0;
     left: -327px;
+    /* Hidden off-screen by default */
     width: 327px;
     height: 100%;
     background-color: #1a3a52;
+    /* Navy color */
     padding: 36px 64px 38px 45px;
     transition: left 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 999;
+    /* Above everything else */
     overflow-y: auto;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -102,8 +166,14 @@ input:focus-visible {
 
 .sidebar.active {
     left: 0;
+    /* Slide into view */
 }
 
+/*
+ * Dark Overlay
+ * Semi-transparent black background behind the sidebar.
+ * Clicking it closes the sidebar.
+ */
 .overlay {
     position: fixed;
     top: 0;
@@ -115,6 +185,7 @@ input:focus-visible {
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease;
     z-index: 998;
+    /* Just below the sidebar */
 }
 
 .overlay.active {
@@ -122,11 +193,20 @@ input:focus-visible {
     visibility: visible;
 }
 
+/*
+ * Body Scroll Lock
+ * When the sidebar is open, prevent the page from scrolling.
+ * This class is added/removed by the useSidebar hook.
+ */
 body.sidebar-open {
     overflow: hidden;
 }
 
-/* Subtle scrollbar styling */
+/*
+ * Custom Scrollbar (Webkit browsers: Chrome, Edge, Safari)
+ * Makes the scrollbar match the app's color scheme.
+ * Firefox users will see the default scrollbar.
+ */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -137,6 +217,7 @@ body.sidebar-open {
 
 ::-webkit-scrollbar-thumb {
     background: rgba(198, 255, 0, 0.3);
+    /* Lime green tint */
     border-radius: 4px;
 }
 

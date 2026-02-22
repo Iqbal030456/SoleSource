@@ -1,30 +1,30 @@
+/**
+ * ============================================================
+ * LatestNews Component
+ * ============================================================
+ *
+ * PURPOSE:
+ *   Renders the "Latest News" section on the NewsPage.
+ *   Displays news articles in a responsive 3-column grid
+ *   with staggered fade-in animations.
+ *
+ * HOW IT WORKS:
+ *   1. Imports all articles from `src/data/news.js`
+ *   2. Maps each article into a <NewsCard /> component
+ *   3. Wraps everything in Framer Motion for animations
+ *
+ * HOW TO EDIT:
+ *   - To add or change news articles, edit `src/data/news.js`
+ *   - To change the section title/subtitle, edit the strings below
+ *   - To change animation speed, edit the `staggerContainerVariants`
+ *     values in `src/config/animations.js`
+ * ============================================================
+ */
+
 import { motion } from 'framer-motion';
 import NewsCard from './NewsCard';
 import { newsArticles } from '../data/news';
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.15,
-            delayChildren: 0.3,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            duration: 0.5,
-            ease: [0.25, 0.46, 0.45, 0.94],
-        },
-    },
-};
+import { staggerContainerVariants, itemVariants } from '../config/animations';
 
 const LatestNews = () => {
     return (
@@ -42,10 +42,10 @@ const LatestNews = () => {
                 </p>
             </motion.div>
 
-            {/* News Grid */}
+            {/* News Grid — 3 columns on large screens */}
             <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                variants={containerVariants}
+                variants={staggerContainerVariants}
                 initial="hidden"
                 animate="visible"
             >
@@ -60,4 +60,3 @@ const LatestNews = () => {
 };
 
 export default LatestNews;
-
